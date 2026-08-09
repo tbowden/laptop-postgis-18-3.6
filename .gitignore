@@ -1,0 +1,78 @@
+# =============================================================================
+# root .gitignore
+#
+# General, cross-cutting rules only: editors, IDEs, OS artefacts, and
+# personal scratch conventions. Stack-specific rules live in relevant specific
+# dirs such as backend/.gitignore and frontend/.gitignore instead.
+# All applicable .gitignore files work cumulatively as you go down the tree, so
+# nothing in those files needs to be repeated here, and nothing general
+# here needs to be repeated there.
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# Editors — Vim / Neovim
+# -----------------------------------------------------------------------------
+*.swp          # swap file (active edit session)
+*.swo          # swap overflow
+*.swn          # swap overflow (secondary)
+*~             # backup files
+.netrwhist     # netrw file browser history
+Session.vim    # saved sessions (:mksession)
+tags           # ctags / cscope tag index
+
+
+# -----------------------------------------------------------------------------
+# Editors — VS Code
+# Ignore personal editor state, but let team-shared config through.
+# -----------------------------------------------------------------------------
+**/.vscode/*
+!**/.vscode/settings.json
+!**/.vscode/tasks.json
+!**/.vscode/launch.json
+!**/.vscode/extensions.json
+!**/.vscode/mcp.json
+**/.history/*
+
+
+# -----------------------------------------------------------------------------
+# Other IDEs
+# -----------------------------------------------------------------------------
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+
+# -----------------------------------------------------------------------------
+# OS
+# -----------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+
+
+# -----------------------------------------------------------------------------
+# Generic logs / scratch space
+# Language-specific log patterns (npm-debug.log*, etc.) live in the
+# relevant stack's own .gitignore instead.
+# -----------------------------------------------------------------------------
+*.log
+tmp/
+
+
+# -----------------------------------------------------------------------------
+# Postgres/PostGIS specific
+# -----------------------------------------------------------------------------
+data/
+backups/
+.env
+
+
+# -----------------------------------------------------------------------------
+# Personal scratch — clear this section out regularly
+# -----------------------------------------------------------------------------
+
+# 
