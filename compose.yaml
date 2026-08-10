@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgis/postgis:18.3-3.6
+    image: postgis/postgis:18-3.6
     container_name: postgres
 
     restart: unless-stopped
@@ -12,12 +12,14 @@ services:
       - .env
 
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: postgres
+      NORMAL_USER: ${USER:-developer}
+      NORMAL_USER_PASSWORD: ${NORMAL_USER_PASSWORD}
 
     volumes:
-      # The data dir has changed from Posgres v18 onwards
+      # The data dir has changed from Posgres v18 onwards (it is now versioned)
       # Change ./data to your real Postgres data dir on the host
       - ./data:/var/lib/postgresql
       - ./initdb:/docker-entrypoint-initdb.d:ro
