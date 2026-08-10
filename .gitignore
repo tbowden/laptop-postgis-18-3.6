@@ -67,6 +67,7 @@ tmp/
 # Postgres/PostGIS specific
 # -----------------------------------------------------------------------------
 data/
+gis_data/
 backups/
 .env
 
