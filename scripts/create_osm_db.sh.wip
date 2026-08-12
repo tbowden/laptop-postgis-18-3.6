@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -euo pipefail 
+
+psql -v ON_ERROR_STOP=1 \
+  --username "POSTGRES_USER" \
+  --dbname postgres \
+  --set osm_user="$OSM_USER" \
+  --set osm_user_password="$OSM_USER_PASSWORD" \
+  --set osm_db="$OSM_DB" \
+<<'EOSQL'
+
+  SELECT format(
+  'CREATE ROLE %I WITH LOGIN PASSWORD %L;',
+    :'osm_user', 
+    :'osm_user_password',
+  'CREATE DB 
+  )
+  \gexec
+EOSQL
+
+psql -v ON_ERROR_STOP=1 \
+  --username "OSM_USER" \
+  --dbname postgres \
+<<'EOSQL'
+  CREATE DATABASE %
+

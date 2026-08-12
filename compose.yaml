@@ -20,9 +20,10 @@ services:
 
     volumes:
       # The data dir has changed from Posgres v18 onwards (it is now versioned)
-      # Change ./data to your real Postgres data dir on the host
+      # Change ./data to your preferred Postgres data dir on the host
       - ./data:/var/lib/postgresql
       - ./initdb:/docker-entrypoint-initdb.d:ro
+      - ./gis_data:/usr/local/gis_data
       # Uncomment if you later decide to provide custom config files.
       # - ./postgresql.conf:/etc/postgresql/postgresql.conf:ro
       # - ./pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
@@ -44,6 +45,42 @@ services:
 
     networks:
       - postgres
+
+  osm2pgsql:
+    image: iboates/osm2pgsql:2.3.1
+
+    environment:
+      PGHOST: postgres
+      PGDATABASE: osm_import
+      PGUSER: ${NORMAL_USER}
+      PGPASSWORD: ${NORMAL_USER_PASSWORD}
+
+    volumes:
+      - ./gis_data:/gis_data
+      - ./flex:/flex:ro
+
+    networks:
+      - postgres
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+    
+  pgadmin:
+    image: dpage/pgadmin4:9.17
+
+    ports:
+      - "localhost:5050:80"
+
+    environment:
+      
+
+    networks: 
+      - postgres
+
+    depends-on:
+      postgres:
+        condition: service_healthy
 
 networks:
   postgres:
