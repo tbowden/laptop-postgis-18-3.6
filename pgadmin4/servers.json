@@ -1,0 +1,12 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Local PostGIS",
+      "Group": "GIS",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "postgres",
+      "SSLMode": "prefer"
+    }
+  }
+}
