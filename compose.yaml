@@ -60,31 +60,9 @@ services:
 
     volumes:
       - pgadmin:/var/lib/pgadmin
-      - ./pgadmin_config/servers.json:/pgadmin_config/servers.json:ro
+      - ./pgadmin4/servers.json:/pgadmin4/servers.json:ro
 
     networks: 
-      - postgres
-
-    depends_on:
-      postgres:
-        condition: service_healthy
-
-  osm2pgsql:
-    image: iboates/osm2pgsql:2.3.1
-
-    restart: unless-stopped
-
-    environment:
-      PGHOST: postgres
-      PGDATABASE: osm_import
-      PGUSER: ${USER}
-      PGPASSWORD: ${NORMAL_USER_PASSWORD}
-
-    volumes:
-      - ./gis_data:/gis_data
-      - ./flex:/flex:ro
-
-    networks:
       - postgres
 
     depends_on:
