@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -euo pipefail
+
+usage() { echo "Usage: $0 [=h|--help] | [-v|--verbose] [-f|--flex flex_file]}
+
+while [[ $# -gt 0 ]]; do
+  case "$1 in 
+    -h|--help) usage(); exit 0 ;;
+    -v|--verbose) verbose=true; shift ;;
+
